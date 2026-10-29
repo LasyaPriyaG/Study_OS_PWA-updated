@@ -1,0 +1,25 @@
+{
+  "name": "Cherry Study OS",
+  "short_name": "Cherry Study OS",
+  "description": "Personal academic command center for planning, studying, tracking and improving.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#FFF9F1",
+  "theme_color": "#2F80A8",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

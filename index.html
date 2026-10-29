@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#2f80a8">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Cherry Study OS</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-mark">C</div><div><strong>Cherry Study OS</strong><small>Personal academic command center</small></div></div>
+  <nav id="nav">
+    <button class="nav-btn active" data-page="dashboard">⌂ <span>Dashboard</span></button>
+    <button class="nav-btn" data-page="planner">▦ <span>7-Day Planner</span></button>
+    <button class="nav-btn" data-page="todo">✓ <span>To-Do</span></button>
+    <button class="nav-btn" data-page="doubts">? <span>Doubts</span></button>
+    <button class="nav-btn" data-page="mistakes">↻ <span>Mistake Log</span></button>
+    <button class="nav-btn" data-page="notes">✎ <span>Notes</span></button>
+    <button class="nav-btn" data-page="vault">▱ <span>File Vault</span></button>
+    <button class="nav-btn" data-page="progress">◒ <span>Progress</span></button>
+    <button class="nav-btn" data-page="focus">◷ <span>Focus</span></button>
+    <button class="nav-btn" data-page="review">✦ <span>Monthly Review</span></button>
+  </nav>
+  <div class="sidebar-bottom">
+    <button class="theme-btn" id="themeBtn">☀️ <span>Daylight</span></button>
+  </div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+  <div><div class="eyebrow">YOUR STUDY COMMAND CENTER</div><h1 id="pageTitle">Good evening, Lasya.</h1><p id="pageSubtitle">Plan it. Do it. Track it. Improve it.</p></div>
+  <div class="date-pill" id="todayDate"></div>
+</header>
+
+<!-- DASHBOARD -->
+<section class="page active" id="dashboard">
+  <div class="hero-card">
+    <div><span class="hero-kicker">TODAY'S COMMAND CENTER</span><h2 id="heroMessage">Let's make today count.</h2><p>Your schedule is yours to create. The OS only helps you see what matters.</p></div>
+    <div class="hero-orb">🌊</div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card blue"><span>Today's completion</span><strong id="todayPct">0%</strong><small>planned tasks completed</small></div>
+    <div class="stat-card orange"><span>Study today</span><strong id="todayHours">0.0h</strong><small>focused activity</small></div>
+    <div class="stat-card green"><span>Consistency</span><strong id="streak">0 days</strong><small>current study streak</small></div>
+    <div class="stat-card pink"><span>Attention needed</span><strong id="attentionCount">0</strong><small>items waiting for you</small></div>
+  </div>
+
+  <div class="dashboard-grid top-grid">
+    <div class="card momentum-card">
+      <div class="section-head"><div><h2>📈 Study Momentum</h2><p>Day, week and month — all in one view.</p></div><div class="segmented" id="momentumTabs"><button class="active" data-range="day">Day</button><button data-range="week">Week</button><button data-range="month">Month</button></div></div>
+      <div id="momentumChart" class="momentum-chart"></div>
+      <div class="chart-summary"><div><span>Today</span><b id="mToday">0.0h</b></div><div><span>This week</span><b id="mWeek">0.0h</b></div><div><span>This month</span><b id="mMonth">0.0h</b></div><div><span>Best day</span><b id="mBest">—</b></div></div>
+    </div>
+    <div class="card today-card"><div class="section-head"><div><h2>🎯 Today's Focus</h2><p>Only what you need to see now.</p></div><span class="badge" id="todayBadge">0 tasks</span></div><div id="todayTasks" class="list"></div></div>
+  </div>
+
+  <div class="dashboard-grid mid-grid">
+    <div class="card"><div class="section-head"><div><h2>🔥 Study Consistency</h2><p>Last 12 weeks of real activity.</p></div><span class="mini-stat" id="activeDays">0 active days</span></div><div id="heatmap" class="heatmap"></div><div class="heat-legend"><span>Less</span><i></i><i></i><i></i><i></i><span>More</span></div><div class="consistency-line"><b id="bestStreak">Best streak: 0 days</b><span id="monthActive">0/30 active days this month</span></div></div>
+    <div class="card"><div class="section-head"><div><h2>⚠️ Attention Needed</h2><p>Things that are waiting for you.</p></div></div><div id="attentionList" class="list"></div></div>
+  </div>
+
+  <div class="dashboard-grid lower-grid">
+    <div class="card"><div class="section-head"><div><h2>🧠 Areas Needing Attention</h2><p>Based on unresolved doubts, mistakes and unfinished work.</p></div></div><div id="weakAreas"></div></div>
+    <div class="card"><div class="section-head"><div><h2>🏆 Today's Wins</h2><p>Visible evidence that you are moving forward.</p></div></div><div id="winsList" class="list"></div></div>
+  </div>
+
+  <div class="dashboard-grid bottom-grid">
+    <div class="card"><div class="section-head"><div><h2>🧠 Review Queue</h2><p>Things worth revisiting soon.</p></div></div><div id="reviewQueue" class="list"></div></div>
+    <div class="card"><div class="section-head"><div><h2>⚡ Quick Capture</h2><p>Get it out of your head before it gets lost.</p></div></div><div class="capture-row"><input id="quickTask" placeholder="Capture a task..."><button class="primary" id="quickAdd">Add</button></div><div class="intention"><label>Weekly intention</label><textarea id="intention" placeholder="What matters most this week?"></textarea><button class="secondary" id="saveIntention">Save intention</button></div></div>
+  </div>
+</section>
+
+<!-- PLANNER -->
+<section class="page" id="planner"><div class="card"><div class="section-head"><div><h2>📅 7-Day Planner</h2><p>You create every task and time slot. Nothing is pre-planned.</p><div class="planner-meta"><span id="plannerWeekLabel"></span><span class="badge" id="plannerModeBadge">This week</span></div></div><div class="planner-actions"><button class="secondary" id="thisWeekBtn">↩ This week</button><button class="secondary" id="weekHistoryBtn" aria-label="View previous weeks" title="View previous weeks">🕘 Previous weeks</button><button class="primary" id="addTaskBtn">＋ Add scheduled task</button></div></div><div class="week-scroll"><div id="weekGrid" class="week-grid"></div></div></div></section>
+
+<!-- TODO -->
+<section class="page" id="todo"><div class="two-col"><div class="card"><div class="section-head"><div><h2>✓ To-Do</h2><p>Loose tasks that don't need a calendar slot.</p></div></div><div class="form-row"><input id="todoInput" placeholder="What needs to be done?"><select id="todoPriority"><option>Normal</option><option>High</option><option>Low</option></select><button class="primary" id="addTodoBtn">Add</button></div><div id="todoList" class="list"></div></div><div class="card info-card"><h2>Simple system</h2><div class="rule"><b>Planner</b><span>time-specific study work</span></div><div class="rule"><b>To-Do</b><span>loose tasks</span></div><div class="rule"><b>Doubts</b><span>questions to resolve</span></div><div class="rule"><b>Mistake Log</b><span>patterns to learn from</span></div><div class="rule"><b>Vault</b><span>important files</span></div></div></div></section>
+
+<!-- DOUBTS -->
+<section class="page" id="doubts"><div class="two-col"><div class="card form-card"><h2>❓ Capture a doubt</h2><p>Write it in your own words. That makes the eventual solution easier to remember.</p><input id="dTitle" placeholder="Short title"><select id="dSubject"><option>General</option><option>Java</option><option>Python</option><option>Web Development</option><option>JavaScript</option><option>Maths</option><option>Statistics</option><option>CP</option><option>IITM</option><option>Other</option></select><textarea id="dText" placeholder="What exactly are you confused about?"></textarea><button class="primary" id="addDoubtBtn">Save doubt</button></div><div class="card"><div class="section-head"><div><h2>Doubt Bank</h2><p>Resolve → mark solved → revisit if it returns.</p></div><span class="badge" id="doubtBadge">0 open</span></div><div id="doubtList" class="list"></div></div></div></section>
+
+<!-- MISTAKES -->
+<section class="page" id="mistakes"><div class="two-col"><div class="card form-card"><h2>↻ Mistake Log</h2><p>Turn exam confusion and silly mistakes into something you can actually fix.</p><input id="mTitle" placeholder="What went wrong?"><select id="mSubject"><option>Java</option><option>Python</option><option>Web Development</option><option>JavaScript</option><option>Maths</option><option>Statistics</option><option>CP</option><option>IITM</option><option>Other</option></select><textarea id="mWhy" placeholder="Why did it happen? e.g. misread question, forgot condition, rushed..."></textarea><textarea id="mCorrect" placeholder="Correct understanding / rule to remember..."></textarea><button class="primary" id="addMistakeBtn">Log mistake</button></div><div class="card"><div class="section-head"><div><h2>Reattempt Queue</h2><p>Learning is complete only after you can do it again.</p></div><span class="badge" id="mistakeBadge">0 waiting</span></div><div id="mistakeList" class="list"></div></div></div></section>
+
+<!-- NOTES -->
+<section class="page" id="notes"><div class="two-col notes-grid"><div class="card form-card"><div class="section-head"><div><h2>✎ Knowledge Base</h2><p>Build notes you can actually return to.</p></div></div><input id="noteTitle" placeholder="Note title"><div class="form-row"><input id="noteSubject" placeholder="Subject / area"><select id="noteType"><option>Concept</option><option>Revision</option><option>Class Notes</option><option>Idea</option><option>Cheat Sheet</option><option>Other</option></select></div><textarea id="noteText" class="large-text" placeholder="Write your notes here..."></textarea><button class="primary" id="saveNoteBtn">Save note</button></div><div class="card"><div class="section-head"><div><h2>My Notes</h2><p>Search your personal knowledge library.</p></div><input class="search" id="noteSearch" placeholder="Search..."></div><div id="notesList" class="list"></div></div></div></section>
+
+<!-- VAULT -->
+<section class="page" id="vault"><div class="two-col"><div class="card"><h2>▱ File Vault</h2><p>Save your important study files locally in this browser.</p><input type="file" id="fileInput" multiple><button class="primary" id="saveFilesBtn">Save selected files</button><div id="fileList" class="list"></div></div><div class="card"><h2>Suggested organization</h2><div class="folder-grid"><div>📁 Scaler</div><div>📁 IITM</div><div>📁 Assignments</div><div>📁 PYQs</div><div>📁 Projects</div><div>📁 Certificates</div><div>📁 Exam Material</div><div>📁 Important</div></div><p class="tiny">The app keeps the files on this device/browser. GitHub Pages does not upload them anywhere.</p></div></div></section>
+
+<!-- PROGRESS -->
+<section class="page" id="progress"><div class="stats-grid"><div class="stat-card blue"><span>Tasks completed</span><strong id="pDone">0</strong><small>all scheduled tasks</small></div><div class="stat-card orange"><span>Total study</span><strong id="pHours">0.0h</strong><small>logged activity</small></div><div class="stat-card green"><span>Active days</span><strong id="pActive">0</strong><small>last 30 days</small></div><div class="stat-card pink"><span>Doubts solved</span><strong id="pSolved">0</strong><small>knowledge cleared</small></div></div><div class="two-col" style="margin-top:18px"><div class="card"><h2>📊 Study Hours</h2><p>Completed scheduled tasks plus focus sessions.</p><div id="bigProgressChart" class="momentum-chart tall"></div></div><div class="card"><h2>📋 Completion</h2><div id="subjectProgress"></div></div></div><div class="card" style="margin-top:18px"><h2>🔥 Consistency detail</h2><div id="bigHeatmap" class="heatmap"></div></div></section>
+
+<!-- FOCUS -->
+<section class="page" id="focus"><div class="two-col"><div class="card focus-card"><span class="hero-kicker">FOCUS SESSION</span><div id="timer" class="timer">25:00</div><div class="form-row"><input id="minutes" type="number" min="1" max="180" value="25"><button class="primary" id="startTimer">Start</button><button class="secondary" id="resetTimer">Reset</button></div><div class="focus-note"><label>Session intention</label><textarea id="focusNote" placeholder="What exactly will you finish in this session?"></textarea></div></div><div class="card"><h2>How Focus connects to Progress</h2><p>When a focus session finishes, its minutes are recorded in your study activity automatically. That means your Day / Week / Month graph grows from the work you actually do.</p><div class="focus-principle">🎯 Make the target observable.<br><span>“Solve 5 Java loop problems” is better than “study Java”.</span></div></div></div></section>
+
+<!-- REVIEW -->
+<section class="page" id="review"><div class="card review-hero"><span class="hero-kicker">MONTHLY REVIEW</span><h2 id="reviewTitle">This month</h2><p>Look back, notice patterns, then choose what to change next month.</p></div><div class="stats-grid review-stats"><div class="stat-card blue"><span>Total study</span><strong id="rHours">0.0h</strong></div><div class="stat-card orange"><span>Active days</span><strong id="rDays">0</strong></div><div class="stat-card green"><span>Tasks completed</span><strong id="rTasks">0</strong></div><div class="stat-card pink"><span>Doubts resolved</span><strong id="rDoubts">0</strong></div></div><div class="two-col" style="margin-top:18px"><div class="card"><h2>What improved?</h2><textarea id="reviewImproved" placeholder="Write what genuinely improved this month..."></textarea><h2 style="margin-top:16px">What should change?</h2><textarea id="reviewChange" placeholder="One or two changes for next month..."></textarea><button class="primary" id="saveReview">Save review</button></div><div class="card"><h2>Monthly snapshot</h2><div id="reviewSnapshot"></div></div></div></section>
+</main>
+</div>
+
+<div class="modal" id="weekHistoryModal"><div class="modal-box"><div class="section-head"><div><h2>🕘 Previous weeks</h2><p>Your old planner weeks stay saved here.</p></div><button class="secondary" id="closeWeekHistory">Close</button></div><div id="weekHistoryList" class="list"></div></div></div>
+<div class="modal" id="taskModal"><div class="modal-box"><div class="section-head"><div><h2>Add scheduled task</h2><p>Add only what you choose.</p></div><button class="secondary" id="closeTask">Close</button></div><div class="form-row"><div><label>Day</label><select id="tDay"></select></div><div><label>Start time</label><input id="tTime" type="time"></div></div><div class="form-row"><div><label>Duration (min)</label><input id="tDuration" type="number" min="5" value="60"></div><div><label>Subject / area</label><input id="tSubject" placeholder="e.g. Java"></div></div><input id="tName" placeholder="What will you do?"><select id="tPriority"><option>Normal</option><option>High</option><option>Low</option></select><button class="primary" id="saveTaskBtn">Add to planner</button></div></div>
+
+<script src="app.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js").catch(console.error);
+  });
+}
+</script>
+</body>
+</html>
